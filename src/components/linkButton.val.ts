@@ -2,7 +2,7 @@ import { Schema } from "@valbuild/core";
 import { s, t } from "../../val.config";
 import pageVal from "../app/blogs/[slug]/page.val";
 
-const internlLinkSchema = s.object({
+const blogLinkSchema = s.object({
   type: s.literal("blog"),
   // NB: s.keyOf is recursive here, so we need to use a getter and explicitly type it
   get url(): Schema<string> {
@@ -29,7 +29,7 @@ export const linkButton = s.object({
   variant: s.union(s.literal("primary"), s.literal("secondary")),
   // NB: discriminated union:
   get link() {
-    return s.union("type", externalLinkSchema, internlLinkSchema);
+    return s.union("type", externalLinkSchema, blogLinkSchema);
   },
 });
 
